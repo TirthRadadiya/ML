@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
 def index():
-    return "Starting of Machine Learning End to End Project"
+    return "CI CD is not that hard"
 
 
 if __name__=="__main__":
