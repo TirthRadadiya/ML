@@ -1,9 +1,11 @@
 from flask import Flask
+from housing.logger import logs
 
 app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
 def index():
+    logs.info("we are testing loggind module")
     return "CI CD is not that hard"
 
 

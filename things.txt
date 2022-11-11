@@ -1,0 +1,4 @@
+To understand whole pipeline see the lecture 92 on dashboard.
+pipeline
+1> Data Ingestion - Bringing Data to project from multiple resources
+2> Data Validation - Schema Validation like data types of the data and the number of columns, etc..
