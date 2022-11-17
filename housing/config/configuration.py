@@ -1,6 +1,4 @@
-
-from housing.entity.config_entity import DataIngestionConfig, DataTransformationConfig,DataValidationConfig,   \
-ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig,TrainingPipelineConfig
+from housing.entity.config_entity import DataIngestionConfig, DataTransformationConfig,DataValidationConfig,ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig,TrainingPipelineConfig
 from housing.util.util import read_yaml_file
 from housing.logger import logging
 import sys,os
@@ -90,7 +88,6 @@ class Configuartion:
 
             report_page_file_path = os.path.join(data_validation_artifact_dir,
             data_validation_config[DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY]
-
             )
 
             data_validation_config = DataValidationConfig(

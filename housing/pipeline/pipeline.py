@@ -1,5 +1,3 @@
-# from housing.component.data_validation import DataValidation
-# from housing.component.data_transformation import DataTransformation
 # from housing.component.model_trainer import ModelTrainer
 # from housing.component.model_evaluation import ModelEvaluation
 # from housing.component.model_pusher import ModelPusher
@@ -12,9 +10,13 @@ from multiprocessing import Process
 from threading import Thread
 from typing import List
 
-from housing.components.data_ingestion import DataIngestion
-from housing.config.configuration import Configuartion
 import pandas as pd
+
+
+from housing.components.data_validation import DataValidation
+from housing.components.data_ingestion import DataIngestion
+from housing.components.data_transformation import DataTransformation
+from housing.config.configuration import Configuartion
 from housing.constant import EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME
 from housing.entity.artifact_entity import (DataIngestionArtifact,
                                             DataTransformationArtifact,
@@ -55,29 +57,29 @@ class Pipeline(Thread):
         except Exception as e:
             raise HousingException(e, sys) from e
 
-    # def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) \
-    #         -> DataValidationArtifact:
-    #     try:
-    #         data_validation = DataValidation(data_validation_config=self.config.get_data_validation_config(),
-    #                                          data_ingestion_artifact=data_ingestion_artifact
-    #                                          )
-    #         return data_validation.initiate_data_validation()
-    #     except Exception as e:
-    #         raise HousingException(e, sys) from e
+    def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) \
+            -> DataValidationArtifact:
+        try:
+            data_validation = DataValidation(data_validation_config=self.config.get_data_validation_config(),
+                                             data_ingestion_artifact=data_ingestion_artifact
+                                             )
+            return data_validation.initiate_data_validation()
+        except Exception as e:
+            raise HousingException(e, sys) from e
 
-    # def start_data_transformation(self,
-    #                               data_ingestion_artifact: DataIngestionArtifact,
-    #                               data_validation_artifact: DataValidationArtifact
-    #                               ) -> DataTransformationArtifact:
-    #     try:
-    #         data_transformation = DataTransformation(
-    #             data_transformation_config=self.config.get_data_transformation_config(),
-    #             data_ingestion_artifact=data_ingestion_artifact,
-    #             data_validation_artifact=data_validation_artifact
-    #         )
-    #         return data_transformation.initiate_data_transformation()
-    #     except Exception as e:
-    #         raise HousingException(e, sys)
+    def start_data_transformation(self,
+                                  data_ingestion_artifact: DataIngestionArtifact,
+                                  data_validation_artifact: DataValidationArtifact
+                                  ) -> DataTransformationArtifact:
+        try:
+            data_transformation = DataTransformation(
+                data_transformation_config=self.config.get_data_transformation_config(),
+                data_ingestion_artifact=data_ingestion_artifact,
+                data_validation_artifact=data_validation_artifact
+            )
+            return data_transformation.initiate_data_transformation()
+        except Exception as e:
+            raise HousingException(e, sys)
 
     # def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
     #     try:
